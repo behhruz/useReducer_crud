@@ -71,6 +71,28 @@ const Hooks = () => {
           },
         };
       }
+      // update
+      case "update": {
+        return {
+          ...state,
+          Dataes: state.Dataes.map((v) => {
+            if (v.id == state.add.id) {
+              return state.add;
+            } else return v;
+          }),
+          add: {
+            id: "",
+            username: "",
+            email: "",
+            ip: "",
+            time: "",
+            login: "",
+            confirmation: "",
+          },
+        };
+      }
+      default:
+        return state;
     }
   };
   const [state, dispatch] = useReducer(reduce, {
@@ -178,7 +200,9 @@ const Hooks = () => {
                 {state.update ? (
                   <>
                     {" "}
-                    <Button>Edit</Button>
+                    <Button onClick={() => dispatch({ type: "update" })}>
+                      Edit
+                    </Button>
                     <Button onClick={() => dispatch({ type: "cancel" })}>
                       Cancel
                     </Button>
